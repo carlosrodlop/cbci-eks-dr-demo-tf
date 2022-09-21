@@ -1,0 +1,5 @@
+Schedule "cbci-dr" created successfully.
+NAME   CLASS   HOSTS                   ADDRESS                                                                PORTS   AGE
+cjoc   alb     ci.dw22.pscbdemos.com   k8s-cloudbeescicbci-88a618ee2f-726142144.us-west-1.elb.amazonaws.com   80      79m
+ALB ready
+Operation center ready at https://ci.dw22.pscbdemos.com/cjoc/

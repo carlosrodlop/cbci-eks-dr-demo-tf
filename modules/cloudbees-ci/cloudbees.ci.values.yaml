@@ -1,0 +1,39 @@
+OperationsCenter:
+  Annotations:
+    cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
+  CasC:
+    Enabled: true
+  ConfigMapName: oc-casc-bundle
+  ContainerEnv:
+    - name: SECRETS
+      value: /var/run/secrets/cjoc
+  ExtraVolumeMounts:
+    - mountPath: /var/run/secrets/cjoc
+      name: oc-secrets
+    - mountPath: /var/jenkins_home/cb-casc-bundles-store/mc
+      name: mc-casc-bundle
+  ExtraVolumes:
+    - name: oc-secrets
+      secret:
+        defaultMode: 400
+        secretName: oc-secrets
+    - configMap:
+        defaultMode: 400
+        name: mc-casc-bundle
+      name: mc-casc-bundle
+  HostName: ci.dw22.pscbdemos.com
+  Ingress:
+    Annotations:
+      alb.ingress.kubernetes.io/scheme: internet-facing
+      alb.ingress.kubernetes.io/target-type: ip
+    Class: alb
+  JavaOpts: -Dcom.cloudbees.jenkins.cjp.installmanager.CJPPluginManager.enablePluginCatalogInOC=true -Dcom.cloudbees.masterprovisioning.kubernetes.KubernetesMasterProvisioning.deleteClaim=true
+  Platform: eks
+  Protocol: https
+  Resources:
+    Limits:
+      Cpu: 1
+      Memory: 2G
+    Requests:
+      Cpu: 1
+      Memory: 2G
